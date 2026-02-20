@@ -1278,7 +1278,8 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-bg">
-            <div class="hero-video-wrapper">
+            <!-- Background Video Removed as requested to show image -->
+            <!-- <div class="hero-video-wrapper">
                 <iframe 
                     src="https://www.youtube.com/embed/MLpWrANjFbI?autoplay=1&mute=1&controls=0&loop=1&playlist=MLpWrANjFbI&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1" 
                     title="Background Video"
@@ -1286,8 +1287,8 @@
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
                 </iframe>
-            </div>
-            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80" alt="Athlete training" class="hero-image">
+            </div> -->
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80" alt="Athlete training" class="hero-image" style="display: block;">
             <div class="hero-gradient"></div>
         </div>
         
@@ -1312,19 +1313,18 @@
                 </button>
             </div>
             
-            <!-- Espaço para o vídeo - Troque o ID do YouTube abaixo (src=".../embed/SEU_ID...") -->
+            <!-- Espaço para o vídeo - Trocado para YouTube Embed para funcionar na Vercel -->
             <div class="hero-video-card">
-                <video 
-                    id="mainVideo" 
-                    controls 
-                    autoplay 
-                    playsinline 
-                    controlsList="nodownload" 
-                    oncontextmenu="return false;" 
-                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; background: #000;">
-                    <source src="Vídeo Site G9.mov" type="video/mp4">
-                    Seu navegador não suporta vídeos HTML5.
-                </video>
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/dngDhDFpgTU?si=R9rnyKOnXxRE7_4y&rel=0&modestbranding=1&showinfo=0" 
+                    title="Vídeo do Protocolo G9" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen>
+                </iframe>
             </div>
 
             <div class="social-proof">
@@ -1768,37 +1768,6 @@
             rootMargin: '0px 0px -50px 0px'
         };
         
-        // Video Resume Logic
-        document.addEventListener('DOMContentLoaded', () => {
-            const video = document.getElementById('mainVideo');
-            if (!video) return;
-
-            const STORAGE_KEY = 'g9_video_time';
-            
-            // Tenta recuperar o tempo salvo
-            const savedTime = localStorage.getItem(STORAGE_KEY);
-            if (savedTime) {
-                video.currentTime = parseFloat(savedTime);
-            }
-            
-            // Salva o tempo a cada segundo enquanto toca
-            setInterval(() => {
-                if (!video.paused) {
-                    localStorage.setItem(STORAGE_KEY, video.currentTime);
-                }
-            }, 1000);
-
-            // Garante autoplay (navegadores exigem mudo para autoplay)
-            // Tentamos tocar com som primeiro, se falhar, avisamos no console
-            // video.muted = false; // Já está false por padrão no HTML
-            video.play().catch(e => {
-                console.log('Autoplay com som bloqueado pelo navegador. O usuário precisa interagir primeiro.', e);
-                // Opcional: Mutar e tentar de novo se quiser forçar o play visual
-                // video.muted = true;
-                // video.play();
-            });
-        });
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
